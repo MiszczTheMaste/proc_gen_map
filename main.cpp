@@ -18,20 +18,20 @@ void generateMap(){
             mapTile[i].walkable = false;
         }
     }
-    mapa[0][0].walkable = true;
-    for(int i=0;i<16;i++){
-        for(int g=0;g<16;g++){
+    mapa[1][1].walkable = true;
+    for(int i=1;i<15;i++){
+        for(int g=1;g<15;g++){
            if(mapa[i][g].walkable == true){
-                if(mapa[i-1][g].walkable != true && i > 0){
+                if(mapa[i-1][g].walkable != true && i > 1){
                     mapa[i-1][g].walkable = rand() % 2;
                 }
-                if(mapa[i+1][g].walkable != true && i < 16){
+                if(mapa[i+1][g].walkable != true && i < 15){
                     mapa[i+1][g].walkable = rand() % 2;
                 }
-                if(mapa[i][g-1].walkable != true && g > 0){
+                if(mapa[i][g-1].walkable != true && g > 1){
                     mapa[i][g-1].walkable = rand() % 2;
                 }
-                if(mapa[i][g+1].walkable != true && g < 16){
+                if(mapa[i][g+1].walkable != true && g < 15){
                     mapa[i][g+1].walkable = rand() % 2;
                 }
            }
