@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1521746441 source:d:\procedural_map\main.cpp
+	<iostream>
+	<cstdlib>
+	<ctime>
+
