@@ -82,6 +82,25 @@ void generateMap(){
 
         }
     }
+    for(int i=15;i<1;i--){
+        for(int g=15;g>1;g--){
+           if(mapa[i][g].walkable == true){
+                if(mapa[i-1][g].walkable != true && i > 1){
+                    mapa[i-1][g].walkable = rand() % 2;
+                }
+                if(mapa[i+1][g].walkable != true && i < 14){
+                    mapa[i+1][g].walkable = rand() % 2;
+                }
+                if(mapa[i][g-1].walkable != true && g > 1){
+                    mapa[i][g-1].walkable = rand() % 2;
+                }
+                if(mapa[i][g+1].walkable != true && g < 14){
+                    mapa[i][g+1].walkable = rand() % 2;
+                }
+           }
+
+        }
+    }
 }
 void drawMap(){
     for(auto &mapTile : mapa){
@@ -108,7 +127,7 @@ bool checkMap(){
            }
         }
     }
-    if(tileCount < 40 || tileCount == 256){
+    if(tileCount < 40 || tileCount > 200){
         return false;
     }else{
         return true;
@@ -117,6 +136,9 @@ bool checkMap(){
 int main()
 {
     int fail = 0;
+    cout << "'y' to draw again, 'g' to draw again and gets number of failed attempts, 'n' to exit";
+    cout << endl;
+    cin >> tet;
     while(true){
         if(tet == "n"){
         return 0;
