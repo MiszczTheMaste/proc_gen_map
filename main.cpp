@@ -11,7 +11,7 @@ class Tile{
 Tile mapa[16][16];
 
 string tet;
-void generateMap(){
+/*void generateMap(){
     srand(time(0));
     for(auto &mapTile : mapa){
         for(int i=0;i<16;i++){
@@ -39,7 +39,50 @@ void generateMap(){
         }
     }
 }
+*/
+void generateMap(){
+    srand(time(0));
+    for(auto &mapTile : mapa){
+        for(int i=0;i<16;i++){
+            mapTile[i].walkable = false;
+        }
+    }
+    int param1 = rand() % 14 + 1;
+    int param2 = rand() % 14 + 1;
+    mapa[param1][param2].walkable = true;
+    if(mapa[param1-1][param2].walkable != true && param1 > 1){
+        mapa[param1-1][param2].walkable = rand() % 2;
+    }
+    if(mapa[param1+1][param2].walkable != true && param1 < 15){
+        mapa[param1+1][param2].walkable = rand() % 2;
+    }
+    if(mapa[param1][param2-1].walkable != true && param2 > 1){
+        mapa[param1][param2-1].walkable = rand() % 2;
+    }
+    if(mapa[param1][param2+1].walkable != true && param2 < 15){
+        mapa[param1][param2+1].walkable = rand() % 2;
+    }
 
+     for(int i=1;i<15;i++){
+        for(int g=1;g<15;g++){
+           if(mapa[i][g].walkable == true){
+                if(mapa[i-1][g].walkable != true && i > 1){
+                    mapa[i-1][g].walkable = rand() % 2;
+                }
+                if(mapa[i+1][g].walkable != true && i < 14){
+                    mapa[i+1][g].walkable = rand() % 2;
+                }
+                if(mapa[i][g-1].walkable != true && g > 1){
+                    mapa[i][g-1].walkable = rand() % 2;
+                }
+                if(mapa[i][g+1].walkable != true && g < 14){
+                    mapa[i][g+1].walkable = rand() % 2;
+                }
+           }
+
+        }
+    }
+}
 void drawMap(){
     for(auto &mapTile : mapa){
         for(int i=0;i<16;i++){
@@ -51,10 +94,11 @@ void drawMap(){
         }
         cout << endl;
     }
-    cout << "'y' to draw again, 'n' to exit";
+    cout << "'y' to draw again, 'g' to draw again and gets number of failed attempts, 'n' to exit";
     cout << endl;
     cin >> tet;
 }
+
 bool checkMap(){
     int tileCount = 0;
     for(int i=0;i<16;i++){
@@ -64,7 +108,7 @@ bool checkMap(){
            }
         }
     }
-    if(tileCount < 20 || tileCount == 256){
+    if(tileCount < 40 || tileCount == 256){
         return false;
     }else{
         return true;
@@ -81,7 +125,7 @@ int main()
             if(checkMap() == true){
                 fail = 0;
                 drawMap();
-            }else{
+            }else if(tet == "g"){
                 fail++;
                 cout << "Failed attempts to generate map: ";
                 cout << fail;
